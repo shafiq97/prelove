@@ -499,38 +499,53 @@ class _AdminDashboardPageState extends State<AdminDashboardPage>
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Add Donation Center'),
-        content: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextField(
-                controller: nameController,
-                decoration: const InputDecoration(labelText: 'Name *'),
-              ),
-              TextField(
-                controller: addressController,
-                decoration: const InputDecoration(labelText: 'Address *'),
-              ),
-              TextField(
-                controller: contactInfoController,
-                decoration: const InputDecoration(labelText: 'Contact Info'),
-              ),
-              TextField(
-                controller: descriptionController,
-                maxLines: 3,
-                decoration: const InputDecoration(labelText: 'Description'),
-              ),
-              TextField(
-                controller: operatingHoursController,
-                decoration: const InputDecoration(
-                    labelText: 'Operating Hours (e.g., Mon-Fri: 9am-5pm)'),
-              ),
-              TextField(
-                controller: imageUrlController,
-                decoration: const InputDecoration(labelText: 'Image URL'),
-              ),
-            ],
+        title: const Text(
+          'Add Donation Center',
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+        content: Container(
+          width: double.maxFinite,
+          constraints: BoxConstraints(
+            maxHeight: MediaQuery.of(context).size.height * 0.6,
+          ),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                TextField(
+                  controller: nameController,
+                  decoration: const InputDecoration(labelText: 'Name *'),
+                ),
+                const SizedBox(height: 16),
+                TextField(
+                  controller: addressController,
+                  decoration: const InputDecoration(labelText: 'Address *'),
+                ),
+                const SizedBox(height: 16),
+                TextField(
+                  controller: contactInfoController,
+                  decoration: const InputDecoration(labelText: 'Contact Info'),
+                ),
+                const SizedBox(height: 16),
+                TextField(
+                  controller: descriptionController,
+                  maxLines: 3,
+                  decoration: const InputDecoration(labelText: 'Description'),
+                ),
+                const SizedBox(height: 16),
+                TextField(
+                  controller: operatingHoursController,
+                  decoration: const InputDecoration(
+                      labelText: 'Operating Hours (e.g., Mon-Fri: 9am-5pm)'),
+                ),
+                const SizedBox(height: 16),
+                TextField(
+                  controller: imageUrlController,
+                  decoration: const InputDecoration(labelText: 'Image URL'),
+                ),
+              ],
+            ),
           ),
         ),
         actions: [

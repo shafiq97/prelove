@@ -61,6 +61,11 @@ requireAdmin(); // Redirect if not admin
               </a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="#add-donation-center" data-bs-toggle="tab">
+                <i class="fas fa-plus-circle me-2"></i> Add Donation Center
+              </a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="#reports" data-bs-toggle="tab">
                 <i class="fas fa-chart-bar me-2"></i> Reports
               </a>
@@ -387,6 +392,17 @@ requireAdmin(); // Redirect if not admin
           <!-- Donations Tab -->
           <div class="tab-pane fade" id="donations">
             <h2 class="mt-4">Donation Management</h2>
+            <div class="d-flex justify-content-between mb-3">
+              <div class="input-group w-50">
+                <input type="text" class="form-control" placeholder="Search donations..." id="donationSearch">
+                <button class="btn btn-outline-secondary" type="button">
+                  <i class="fas fa-search"></i>
+                </button>
+              </div>
+              <button class="btn btn-primary" onclick="$('#add-donation-center-tab').click()">
+                <i class="fas fa-plus-circle"></i> Add New Donation Center
+              </button>
+            </div>
             <div class="table-responsive mt-3">
               <table class="table table-striped table-sm" id="donationsTable">
                 <thead>
@@ -404,6 +420,52 @@ requireAdmin(); // Redirect if not admin
                   <!-- Will be populated with AJAX -->
                 </tbody>
               </table>
+            </div>
+          </div>
+
+          <!-- Add Donation Center Tab -->
+          <div class="tab-pane fade" id="add-donation-center">
+            <h2 class="mt-4">Add New Donation Center</h2>
+            <div class="card mt-3">
+              <div class="card-body">
+                <form id="addDonationCenterForm">
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <label for="centerName" class="form-label">Center Name</label>
+                      <input type="text" class="form-control" id="centerName" name="name" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label for="centerAddress" class="form-label">Address</label>
+                      <input type="text" class="form-control" id="centerAddress" name="address" required>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <label for="contactInfo" class="form-label">Contact Information</label>
+                      <input type="text" class="form-control" id="contactInfo" name="contact_info" placeholder="Phone, Email, etc.">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label for="operatingHours" class="form-label">Operating Hours</label>
+                      <input type="text" class="form-control" id="operatingHours" name="operating_hours" placeholder="e.g. Mon-Fri: 9am-5pm">
+                    </div>
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="centerDescription" class="form-label">Description</label>
+                    <textarea class="form-control" id="centerDescription" name="description" rows="3"></textarea>
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="centerImage" class="form-label">Image URL (Optional)</label>
+                    <input type="url" class="form-control" id="centerImage" name="image_url" placeholder="https://example.com/image.jpg">
+                  </div>
+
+                  <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-plus-circle"></i> Add Donation Center
+                  </button>
+                </form>
+              </div>
             </div>
           </div>
 

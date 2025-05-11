@@ -544,6 +544,44 @@ function setupFormHandlers() {
     });
   });
   
+  // Add Donation Center Form
+  $('#addDonationCenterForm').submit(function(e) {
+    e.preventDefault();
+    
+    const formData = {
+      name: $('#centerName').val(),
+      address: $('#centerAddress').val(),
+      contact_info: $('#contactInfo').val(),
+      operating_hours: $('#operatingHours').val(),
+      description: $('#centerDescription').val(),
+      image_url: $('#centerImage').val()
+    };
+    
+    $.ajax({
+      url: 'donation_centers_api.php?action=add_center',
+      type: 'POST',
+      data: JSON.stringify(formData),
+      contentType: 'application/json',
+      dataType: 'json',
+      headers: {
+        'Authorization': 'Bearer ' + getToken()
+      },
+      success: function(response) {
+        if (response.success) {
+          showSuccess('Donation center added successfully');
+          $('#addDonationCenterForm')[0].reset();
+          loadDonations();
+          loadStatistics();
+        } else {
+          showError(response.error || 'Failed to add donation center');
+        }
+      },
+      error: function(xhr) {
+        showError('Failed to add donation center');
+      }
+    });
+  });
+  
   // Update User Form
   $('#editUserForm').submit(function(e) {
     e.preventDefault();
@@ -872,4 +910,3 @@ function showError(message) {
     alert('❌ ' + message);
   }
 }
-  
