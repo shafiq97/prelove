@@ -477,66 +477,66 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       const SizedBox(height: 16),
 
                       // Debug authentication button
-                      ElevatedButton.icon(
-                        icon: const Icon(Icons.health_and_safety),
-                        label: const Text('Test Auth'),
-                        onPressed: () async {
-                          final result = await _apiService.testAuthentication();
-                          if (result['success']) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                  content: Text(
-                                      'Authentication working: ${result['user']['username']}')),
-                            );
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                  content:
-                                      Text('Auth failed: ${result['error']}')),
-                            );
-                          }
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.blue.shade800,
-                          foregroundColor: Colors.white,
-                        ),
-                      ),
-                      const SizedBox(height: 8),
+                      // ElevatedButton.icon(
+                      //   icon: const Icon(Icons.health_and_safety),
+                      //   label: const Text('Test Auth'),
+                      //   onPressed: () async {
+                      //     final result = await _apiService.testAuthentication();
+                      //     if (result['success']) {
+                      //       ScaffoldMessenger.of(context).showSnackBar(
+                      //         SnackBar(
+                      //             content: Text(
+                      //                 'Authentication working: ${result['user']['username']}')),
+                      //       );
+                      //     } else {
+                      //       ScaffoldMessenger.of(context).showSnackBar(
+                      //         SnackBar(
+                      //             content:
+                      //                 Text('Auth failed: ${result['error']}')),
+                      //       );
+                      //     }
+                      //   },
+                      //   style: ElevatedButton.styleFrom(
+                      //     backgroundColor: Colors.blue.shade800,
+                      //     foregroundColor: Colors.white,
+                      //   ),
+                      // ),
+                      // const SizedBox(height: 8),
 
                       // Debug profile API button
-                      ElevatedButton.icon(
-                        icon: const Icon(Icons.engineering),
-                        label: const Text('Debug Profile API'),
-                        onPressed: () async {
-                          final result = await _apiService.debugProfile();
-                          showDialog(
-                            context: context,
-                            builder: (context) => AlertDialog(
-                              title: Text(result['success']
-                                  ? 'Profile Debug OK'
-                                  : 'Profile Debug Error'),
-                              content: SingleChildScrollView(
-                                child: Text(
-                                  result['success']
-                                      ? 'Token data: ${result['token_data']}'
-                                      : 'Error: ${result['error']}',
-                                ),
-                              ),
-                              actions: [
-                                TextButton(
-                                  onPressed: () => Navigator.pop(context),
-                                  child: const Text('Close'),
-                                ),
-                              ],
-                            ),
-                          );
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.green.shade800,
-                          foregroundColor: Colors.white,
-                        ),
-                      ),
-                      const SizedBox(height: 16),
+                      // ElevatedButton.icon(
+                      //   icon: const Icon(Icons.engineering),
+                      //   label: const Text('Debug Profile API'),
+                      //   onPressed: () async {
+                      //     final result = await _apiService.debugProfile();
+                      //     showDialog(
+                      //       context: context,
+                      //       builder: (context) => AlertDialog(
+                      //         title: Text(result['success']
+                      //             ? 'Profile Debug OK'
+                      //             : 'Profile Debug Error'),
+                      //         content: SingleChildScrollView(
+                      //           child: Text(
+                      //             result['success']
+                      //                 ? 'Token data: ${result['token_data']}'
+                      //                 : 'Error: ${result['error']}',
+                      //           ),
+                      //         ),
+                      //         actions: [
+                      //           TextButton(
+                      //             onPressed: () => Navigator.pop(context),
+                      //             child: const Text('Close'),
+                      //           ),
+                      //         ],
+                      //       ),
+                      //     );
+                      //   },
+                      //   style: ElevatedButton.styleFrom(
+                      //     backgroundColor: Colors.green.shade800,
+                      //     foregroundColor: Colors.white,
+                      //   ),
+                      // ),
+                      // const SizedBox(height: 16),
 
                       TextFormField(
                         controller: _fullNameController,
