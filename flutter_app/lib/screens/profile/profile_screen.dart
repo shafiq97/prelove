@@ -108,12 +108,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     try {
       setState(() => _isLoading = true);
-      
+
       // Debug token first
       final tokenTest = await _apiService.testAuthentication();
       if (!tokenTest['success']) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Authentication issue: ${tokenTest['error'] ?? "Unknown auth error"}')),
+          SnackBar(
+              content: Text(
+                  'Authentication issue: ${tokenTest['error'] ?? "Unknown auth error"}')),
         );
         setState(() => _isLoading = false);
         return;
@@ -321,11 +323,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
       });
 
       final response = await _apiService.debugToken();
-      
+
       setState(() {
         _isLoading = false;
       });
-      
+
       // Show response in a dialog
       showDialog(
         context: context,
@@ -333,9 +335,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
           title: Text(response['success'] ? 'Token Verified' : 'Token Error'),
           content: SingleChildScrollView(
             child: Text(
-              response['success'] 
-                ? 'Token data: ${response['token_data']}' 
-                : 'Error: ${response['error']}',
+              response['success']
+                  ? 'Token data: ${response['token_data']}'
+                  : 'Error: ${response['error']}',
             ),
           ),
           actions: [
@@ -351,7 +353,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         _error = e.toString();
         _isLoading = false;
       });
-      
+
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error debugging token: $e')),
       );
@@ -473,6 +475,69 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold)),
                       const SizedBox(height: 16),
+
+                      // Debug authentication button
+                      ElevatedButton.icon(
+                        icon: const Icon(Icons.health_and_safety),
+                        label: const Text('Test Auth'),
+                        onPressed: () async {
+                          final result = await _apiService.testAuthentication();
+                          if (result['success']) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                  content: Text(
+                                      'Authentication working: ${result['user']['username']}')),
+                            );
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                  content:
+                                      Text('Auth failed: ${result['error']}')),
+                            );
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.blue.shade800,
+                          foregroundColor: Colors.white,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+
+                      // Debug profile API button
+                      ElevatedButton.icon(
+                        icon: const Icon(Icons.engineering),
+                        label: const Text('Debug Profile API'),
+                        onPressed: () async {
+                          final result = await _apiService.debugProfile();
+                          showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              title: Text(result['success']
+                                  ? 'Profile Debug OK'
+                                  : 'Profile Debug Error'),
+                              content: SingleChildScrollView(
+                                child: Text(
+                                  result['success']
+                                      ? 'Token data: ${result['token_data']}'
+                                      : 'Error: ${result['error']}',
+                                ),
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context),
+                                  child: const Text('Close'),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.green.shade800,
+                          foregroundColor: Colors.white,
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+
                       TextFormField(
                         controller: _fullNameController,
                         decoration: const InputDecoration(

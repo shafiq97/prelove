@@ -407,42 +407,79 @@ function getProfile() {
     }
 }
 
+// Function to update user profile
 function updateProfile() {
     global $conn;
     
     // Add detailed logging for debugging
     error_log("UPDATE PROFILE ENDPOINT CALLED");
     
-    // Check authorization
-    $headers = getallheaders();
-    error_log("Headers received: " . json_encode($headers));
+    // Get all headers and normalize them for case-insensitive access
+    $allHeaders = getallheaders();
+    $normalizedHeaders = array();
+    foreach ($allHeaders as $name => $value) {
+        $normalizedHeaders[strtolower($name)] = $value;
+    }
+    error_log("All Headers: " . json_encode($allHeaders));
+    error_log("Normalized Headers: " . json_encode($normalizedHeaders));
     
-    if (!isset($headers['Authorization']) && !isset($headers['authorization'])) {
-        error_log("No Authorization header found");
+    // Look for Authorization header in all possible locations
+    $authHeader = null;
+    
+    // Check for regular or lowercase authorization header
+    if (isset($normalizedHeaders['authorization'])) {
+        $authHeader = $normalizedHeaders['authorization'];
+        error_log("Found authorization in normalized headers");
+    }
+    
+    // If not found, check $_SERVER for HTTP_AUTHORIZATION
+    if (!$authHeader && isset($_SERVER['HTTP_AUTHORIZATION'])) {
+        $authHeader = $_SERVER['HTTP_AUTHORIZATION'];
+        error_log("Found Authorization in _SERVER['HTTP_AUTHORIZATION']");
+    }
+    
+    // If still not found, check for other variants in $_SERVER
+    if (!$authHeader) {
+        foreach ($_SERVER as $key => $value) {
+            if (strpos(strtolower($key), 'authorization') !== false) {
+                $authHeader = $value;
+                error_log("Found Authorization in _SERVER key: $key");
+                break;
+            }
+        }
+    }
+    
+    if (!$authHeader) {
+        error_log("No Authorization header found in any location");
         http_response_code(401);
         echo json_encode(['error' => 'Authentication required - No Authorization header found']);
         return;
     }
     
-    // Try to find the Authorization header (case-insensitive)
-    $auth_header = null;
-    if (isset($headers['Authorization'])) {
-        $auth_header = $headers['Authorization'];
-    } elseif (isset($headers['authorization'])) {
-        $auth_header = $headers['authorization'];
+    error_log("Auth header found: " . $authHeader);
+    
+    // Fix for potential double "Bearer Bearer" prefix (could happen in some environments)
+    if (strpos($authHeader, 'Bearer Bearer ') === 0) {
+        $authHeader = 'Bearer ' . substr($authHeader, 14);
+        error_log("Fixed double Bearer prefix: " . $authHeader);
     }
     
-    error_log("Auth header found: " . $auth_header);
-    
-    if (strpos($auth_header, 'Bearer ') !== 0) {
-        error_log("Invalid token format: " . $auth_header);
+    if (strpos($authHeader, 'Bearer ') !== 0) {
+        error_log("Invalid token format: " . $authHeader);
         http_response_code(401);
         echo json_encode(['error' => 'Invalid token format']);
         return;
     }
     
-    $token = substr($auth_header, 7);
+    $token = substr($authHeader, 7);
     error_log("Extracted token: " . $token);
+    
+    if (empty(trim($token))) {
+        error_log("Empty token provided");
+        http_response_code(401);
+        echo json_encode(['error' => 'Empty token provided']);
+        return;
+    }
     
     $user_data = verifyToken($token);
     error_log("Verify token result: " . ($user_data ? json_encode($user_data) : 'false'));
