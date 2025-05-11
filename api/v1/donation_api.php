@@ -123,7 +123,8 @@ function getUserDonations($user_id) {
     try {
         $stmt = $conn->prepare("
             SELECT d.id, d.center_id, d.scheduled_date, d.status,
-                   dc.name as center_name, dc.address as center_address
+                   dc.name as center_name, dc.address as center_address,
+                   dc.location as location
             FROM donations d
             JOIN donation_centers dc ON d.center_id = dc.id
             WHERE d.user_id = :user_id
@@ -181,9 +182,17 @@ function scheduleDonation($user_id) {
             )
         ");
         
+        // Log the scheduled date format for debugging
+        error_log("scheduleDonation - Raw scheduled_date: " . $data['scheduled_date']);
+        
+        // Parse the ISO 8601 datetime string to ensure it's in the correct format
+        // Make sure to preserve the time portion
+        $scheduledDateTime = date('Y-m-d H:i:s', strtotime($data['scheduled_date']));
+        error_log("scheduleDonation - Formatted scheduled_date: " . $scheduledDateTime);
+        
         $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
         $stmt->bindParam(':center_id', $data['center_id'], PDO::PARAM_INT);
-        $stmt->bindParam(':scheduled_date', $data['scheduled_date']);
+        $stmt->bindParam(':scheduled_date', $scheduledDateTime);
         $stmt->execute();
         
         $donation_id = $conn->lastInsertId();

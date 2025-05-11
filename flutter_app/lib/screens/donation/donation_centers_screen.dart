@@ -150,6 +150,21 @@ class _DonationCentersScreenState extends State<DonationCentersScreen> {
     }
   }
 
+  // Format the datetime string for display
+  String _formatDateTime(String dateTimeStr) {
+    if (dateTimeStr.isEmpty) {
+      return 'Not scheduled';
+    }
+
+    try {
+      final DateTime dateTime = DateTime.parse(dateTimeStr);
+      return '${dateTime.year}-${dateTime.month.toString().padLeft(2, '0')}-${dateTime.day.toString().padLeft(2, '0')} at ${dateTime.hour.toString().padLeft(2, '0')}:${dateTime.minute.toString().padLeft(2, '0')}';
+    } catch (e) {
+      print('Error parsing date: $e');
+      return dateTimeStr; // Return original string if parsing fails
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     if (_isLoading) {
@@ -265,7 +280,7 @@ class _DonationCentersScreenState extends State<DonationCentersScreen> {
                             children: [
                               const SizedBox(height: 4),
                               Text(
-                                  'Scheduled for: ${donation['scheduled_date']}'),
+                                  'Scheduled for: ${_formatDateTime(donation['scheduled_date'])}'),
                               const SizedBox(height: 4),
                               Text(
                                 'Status: ${donation['status']}',

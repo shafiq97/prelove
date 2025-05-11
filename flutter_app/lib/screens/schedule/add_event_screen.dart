@@ -114,6 +114,9 @@ class _AddEventScreenState extends State<AddEventScreen> {
         notes: _descriptionController.text.isNotEmpty
             ? _descriptionController.text
             : null,
+        location: _locationController.text.isNotEmpty
+            ? _locationController.text
+            : null,
         outfitId: _selectedOutfit?.id,
       );
 

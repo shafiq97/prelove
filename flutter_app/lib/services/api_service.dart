@@ -741,6 +741,7 @@ class ApiService {
     required String title,
     required DateTime date,
     String? notes,
+    String? location,
     int? outfitId,
   }) async {
     final url = Uri.parse('$_baseUrl/planner_api.php?action=create_event');
@@ -753,6 +754,7 @@ class ApiService {
             .toIso8601String(), // Changed 'date' to 'event_date' to match backend
         'description':
             notes, // Changed 'notes' to 'description' to match backend
+        'location': location,
         'outfit_id': outfitId,
       }),
     );
