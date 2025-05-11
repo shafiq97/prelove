@@ -1,0 +1,61 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* Sidebar */
+#sidebar {
+    width: 250px;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: white;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+#menu-toggle {
+    cursor: pointer;
+}
+
+/* Active Page - Highlight with Pink Color */
+.nav-item.active {
+    color: #f472b6;
+}
+
+/* Floating Middle Button */
+nav a.bg-pink-500 {
+    box-shadow: 0 4px 8px rgba(236, 72, 153, 0.3);
+}
+
+/* Event Item */
+.event-item {
+    background: white;
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Completed Event */
+.completed {
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+
+@media (max-width: 400px) {
+    .container {
+        width: 95%;
+        padding: 15px;
+    }
+    input, select, button {
+        padding: 7px;
+    }
+    .back-button {
+        font-size: 16px;
+    }
+    .social-icons a {
+        font-size: 20px;
+    }
+}

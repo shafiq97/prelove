@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>History - Pre-Love Closet Manager</title>
+    <link rel="stylesheet" href="css/history.css">
+</head>
+
+<body>
+    <header class="header">
+        <a href="home.html" class="back-btn">←</a>
+        <h1>History</h1>
+        <input type="text" id="search" placeholder="Search history...">
+    </header>
+
+    <nav class="filter-bar">
+        <button onclick="filterHistory('all')" class="filter-btn">All</button>
+        <button onclick="filterHistory('buy')" class="filter-btn">🛍️ Purchases</button>
+        <button onclick="filterHistory('sell')" class="filter-btn">📦 Sales</button>
+        <button onclick="filterHistory('donate')" class="filter-btn">🎁 Donations</button>
+        <button onclick="filterHistory('outfit')" class="filter-btn">👗 Outfit Plans</button>
+    </nav>
+
+    <main id="history-container" class="history-container">
+        <!-- History items will be dynamically added here -->
+    </main>
+
+    <script src="js/history.js"></script>
+</body>
+
+</html>

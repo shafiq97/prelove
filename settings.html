@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Settings - Pre-Love Closet Manager</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/settings.css">
+</head>
+
+<body class="bg-gradient-to-r from-pink-400 to-orange-300 min-h-screen">
+
+  <!-- Header -->
+  <header class="bg-white shadow-md p-4 flex justify-between items-center">
+    <a href="home.html" class="text-xl font-bold text-pink-500">←</a>
+    <h1 class="text-xl font-bold text-gray-800">Settings</h1>
+    <div></div>
+  </header>
+
+  <!-- Settings Content -->
+  <main class="p-6 space-y-6 max-w-xl mx-auto">
+
+    <!-- Account Settings -->
+    <section class="bg-white p-4 rounded-lg shadow-md">
+      <h2 class="text-lg font-semibold text-pink-500">👤 Account</h2>
+      <a href="edit-profile.php" class="block mt-4 text-pink-600 hover:underline">Edit Profile</a>
+      <a href="change-password.php" class="block mt-2 text-pink-600 hover:underline">Change Password</a>
+    </section>
+
+    <!-- Closet Preferences -->
+    <section class="bg-white p-4 rounded-lg shadow-md">
+      <h2 class="text-lg font-semibold text-pink-500">🧺 Closet Preferences</h2>
+      <label class="flex items-center mt-4">
+        <input type="checkbox" class="mr-2">
+        Show Sold Items in My Closet
+      </label>
+      <label class="flex items-center mt-4">
+        <input type="checkbox" class="mr-2">
+        Show Donated Items in Profile Feed
+      </label>
+    </section>
+
+    <!-- Donation Settings -->
+    <section class="bg-white p-4 rounded-lg shadow-md">
+      <h2 class="text-lg font-semibold text-pink-500">🎁 Donation Settings</h2>
+      <label class="block mt-4">
+        Preferred Donation Center:
+        <select class="dropdown w-full mt-2 p-2 rounded border border-pink-300 bg-pink-50 text-pink-700">
+          <option value="">Select Center</option>
+          <option value="local">Local Thrift</option>
+          <option value="recycle">Recycle Bin</option>
+          <option value="custom">Other</option>
+        </select>
+      </label>
+    </section>
+
+    <!-- Outfit Planner Settings -->
+    <section class="bg-white p-4 rounded-lg shadow-md">
+      <h2 class="text-lg font-semibold text-pink-500">👗 Outfit Planner</h2>
+      <label class="flex items-center mt-4">
+        <input type="checkbox" class="mr-2">
+        Enable Outfit Suggestions Based on My Closet
+      </label>
+    </section>
+
+    <!-- Notification Preferences -->
+    <section class="bg-white p-4 rounded-lg shadow-md">
+      <h2 class="text-lg font-semibold text-pink-500">🔔 Notifications</h2>
+      <label class="flex items-center mt-4">
+        <input type="checkbox" id="sale-notifications" class="mr-2">
+        Sale Updates
+      </label>
+      <label class="flex items-center mt-4">
+        <input type="checkbox" id="donation-reminders" class="mr-2">
+        Donation Reminders
+      </label>
+    </section>
+
+    <!-- Appearance Settings -->
+    <section class="bg-white p-4 rounded-lg shadow-md">
+      <h2 class="text-lg font-semibold text-pink-500">🎨 Appearance</h2>
+      <label class="flex items-center mt-4">
+        <input type="checkbox" id="darkModeToggle" class="mr-2">
+        Enable Dark Mode
+      </label>
+    </section>
+
+    <!-- Policies -->
+    <section class="bg-white p-4 rounded-lg shadow-md">
+      <h2 class="text-lg font-semibold text-pink-500">⚙️ Others</h2>
+      <a href="terms.html?from=settings">Terms & Conditions</a>
+    </section>
+
+    <!-- Save Button -->
+    <div class="text-center">
+      <button id="save-settings"
+      class="mt-6 bg-gray-800 text-white px-6 py-2 rounded-lg shadow-md hover:bg-gray-700 transition">
+        Save All Settings
+      </button>
+    </div>
+
+  </main>
+
+  <script src="js/settings.js"></script>
+
+</body>
+
+</html>

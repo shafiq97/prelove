@@ -1,0 +1,36 @@
+<!-- admin_dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="css/admin_style.css">
+</head>
+<body>
+  <div class="sidebar">
+    <h2>Admin Panel</h2>
+    <ul>
+      <li onclick="showSection('users')">Users</li>
+      <li onclick="showSection('items')">Items</li>
+      <li onclick="showSection('donations')">Donations</li>
+      <li onclick="showSection('reports')">Reports</li>
+    </ul>
+  </div>
+  <div class="main">
+    <h1>Welcome, Admin</h1>
+    <div id="section-users" class="section">
+      <?php include 'admin_data.php'; showUsers(); ?>
+    </div>
+    <div id="section-items" class="section" style="display:none">
+      <?php include 'admin_data.php'; showItems(); ?>
+    </div>
+    <div id="section-donations" class="section" style="display:none">
+      <?php include 'admin_data.php'; showDonations(); ?>
+    </div>
+    <div id="section-reports" class="section" style="display:none">
+      <p>Reports coming soon...</p>
+    </div>
+  </div>
+  <script src="js/admin_script.js"></script>
+</body>
+</html>

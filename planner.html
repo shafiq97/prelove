@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outfit Planner - Pre-Love Closet Manager</title>
+    <link rel="stylesheet" href="planner_style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+
+    <body class="bg-gradient-to-r from-pink-400 to-orange-300 min-h-screen flex flex-col">
+
+    <!-- Header with Hamburger Menu -->
+    <header class="bg-white shadow-md p-4 flex items-center justify-between">
+        <button id="menu-toggle" class="text-3xl focus:outline-none">☰</button>
+        <h1 class="text-xl font-bold">Outfit Planner</h1>
+        <a href="home.html">🛍️ Go to Shop</a>
+    </header>
+
+    <!-- Sidebar -->
+<nav id="sidebar" class="fixed top-0 left-0 w-64 h-full bg-white shadow-lg transform -translate-x-full transition-transform duration-300 z-50">
+    <!-- Back Button -->
+    <button id="close-sidebar" class="text-3xl p-4 hover:text-pink-500 focus:outline-none">&lt;</button>
+
+    <ul class="p-6 space-y-4">
+        <li><a href="notification.html" class="block text-lg font-semibold hover:text-pink-500">🏠 Notification</a></li>
+        <li><a href="history.html" class="block text-lg font-semibold hover:text-pink-500">📦 History</a></li>
+        <li><a href="settings.html" class="block text-lg font-semibold hover:text-pink-500">🎁 Settings</a></li>
+        <li><a href="profile.html" class="block text-lg font-semibold hover:text-pink-500">👤 Profile</a></li>
+        <li><a href="logout.php" class="block text-lg font-semibold hover:text-pink-500">🚪 Logout</a></li>
+    </ul>
+</nav>
+        
+<h1>Outfit Planner</h1>
+<input type="text" id="outfitName" placeholder="Outfit Name">
+<input type="text" id="outfitItems" placeholder="Items (comma-separated)">
+<button onclick="addOutfit()">Add Outfit</button>
+<div id="outfitList"></div>
+
+    <script src="js/planner_script.js"></script>
+</body>
+
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 right-0 bg-white shadow-lg flex justify-around p-4">
+    <a href="home.html" id="nav-shop" class="nav-item flex flex-col items-center text-gray-500">
+        🛍️ <span>Shop</span>
+    </a>
+    <a href="schedule.html" id="nav-schedule" class="nav-item flex flex-col items-center text-gray-500">
+        🗓️ <span>Schedule</span>
+    </a>
+    <a href="add_item.html" id="nav-add" class="nav-item flex flex-col items-center text-gray-500">
+        ➕ <span>Add</span>
+    </a>
+    <a href="planner.html" id="nav-planner" class="nav-item flex flex-col items-center text-gray-500">
+        👗 <span>Planner</span>
+    </a>
+    <a href="cart.html" id="nav-cart" class="nav-item flex flex-col items-center text-gray-500">
+        🛒 <span>Cart</span>
+    </a>
+</nav>
+
+</html>

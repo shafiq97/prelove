@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Pre-Love Closet Manager</title>
+    <link rel="stylesheet" href="css/profile.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <a href="home.html" class="back-btn">←</a>
+        <h1>My Profile</h1>
+    </header>
+
+    <!-- Profile Info -->
+    <section class="profile-info">
+        <div class="profile-pic-container">
+            <img id="profile-pic" src="default profile image.jpg" alt="Profile Picture">
+        </div>
+        <h2 id="username">Alex Williams</h2>
+        <p id="email">alex@example.com</p>
+        <button onclick="openEditProfileModal()">Edit Profile</button>
+    </section>
+
+    <!-- Tabs -->
+    <nav class="tabs">
+        <button onclick="openTab('sell')">Sell</button>
+        <button onclick="openTab('donate')">Donate</button>
+        <button onclick="openTab('saved')">Saved</button>
+        <button onclick="openTab('dashboard')">Dashboard</button>
+    </nav>
+
+    <!-- Edit Profile Modal -->
+    <div id="edit-profile-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeEditProfileModal()">&times;</span>
+            <h2>Edit Profile</h2>
+            <form id="edit-profile-form">
+                <label for="new-username">Name:</label>
+                <input type="text" id="new-username" name="new-username" value="Alex Williams">
+
+                <label for="new-email">Email:</label>
+                <input type="email" id="new-email" name="new-email" value="alex@example.com">
+
+                <label for="new-profile-pic">Profile Picture:</label>
+                <input type="file" id="new-profile-pic" name="new-profile-pic" accept="image/*" onchange="previewImage(event)">
+
+                <button type="button" onclick="saveProfileChanges()">Save Changes</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/profile.js"></script>
+</body>
+
+</html>

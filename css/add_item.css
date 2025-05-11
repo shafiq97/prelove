@@ -1,0 +1,67 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background: #ff6b81;
+    padding: 15px;
+    text-align: center;
+    color: white;
+    font-size: 18px;
+}
+
+.back-btn {
+    position: absolute;
+    left: 15px;
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+}
+
+main {
+    padding: 20px;
+}
+
+form {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.action-selection {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+button {
+    background: #ff6b81;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #ff4757;
+}

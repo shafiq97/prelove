@@ -1,0 +1,86 @@
+/* cart.css - Styling for Shopping Cart */
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Header */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Sidebar */
+#sidebar {
+    width: 250px;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: white;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+#menu-toggle {
+    cursor: pointer;
+}
+
+/* Active Page - Highlight with Pink Color */
+.nav-item.active {
+    color: #f472b6;
+}
+
+/* Floating Middle Button */
+nav a.bg-pink-500 {
+    box-shadow: 0 4px 8px rgba(236, 72, 153, 0.3);
+}
+
+/* Cart Items */
+.store {
+    margin-top: 1rem;
+}
+
+.item {
+    display: flex;
+    gap: 1rem;
+}
+
+.item img {
+    border-radius: 8px;
+}
+
+.item div {
+    flex-grow: 1;
+}
+
+/* Order Summary */
+#checkout-btn {
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#checkout-btn:hover {
+    background: #ff66a3;
+}
+
+@media (max-width: 400px) {
+    .container {
+        width: 95%;
+        padding: 15px;
+    }
+    input, select, button {
+        padding: 7px;
+    }
+    .back-button {
+        font-size: 16px;
+    }
+    .social-icons a {
+        font-size: 20px;
+    }
+}

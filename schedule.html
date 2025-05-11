@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Schedule - Pre-Love Closet Manager</title>
+    <link rel="stylesheet" href="css/schedule_style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gradient-to-r from-pink-400 to-orange-300 min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-white shadow-md p-4 flex items-center justify-between">
+        <button id="menu-toggle" class="text-3xl focus:outline-none">☰</button>
+        <h1 class="text-xl font-bold">Schedule</h1>
+    </header>
+
+    <!-- Sidebar -->
+<nav id="sidebar" class="fixed top-0 left-0 w-64 h-full bg-white shadow-lg transform -translate-x-full transition-transform duration-300 z-50">
+    <!-- Back Button -->
+    <button id="close-sidebar" class="text-3xl p-4 hover:text-pink-500 focus:outline-none">&lt;</button>
+
+    <ul class="p-6 space-y-4">
+        <li><a href="notification.html" class="block text-lg font-semibold hover:text-pink-500">🏠 Notification</a></li>
+            <li><a href="history.html" class="block text-lg font-semibold hover:text-pink-500">📦 History</a></li>
+            <li><a href="settings.html" class="block text-lg font-semibold hover:text-pink-500">🎁 Settings</a></li>
+            <li><a href="profile.html" class="block text-lg font-semibold hover:text-pink-500">👤 Profile</a></li>
+    </ul>
+</nav>
+
+    <!-- Main Content -->
+    <main class="p-6 mt-4">
+        <h2 class="text-2xl font-bold text-white mb-4">Upcoming Events</h2>
+
+        <!-- Event List -->
+        <div id="event-list" class="space-y-4 mb-6">
+            <!-- Events will be dynamically added here -->
+        </div>
+
+        <!-- Add Event Form -->
+        <h2 class="text-xl font-bold text-white mb-4">Add New Event</h2>
+        <form id="event-form" action="add_event.php" method="POST" class="space-y-4">
+            <input type="text" name="title" id="title" placeholder="Event Title" required class="p-2 rounded w-full">
+            <input type="datetime-local" name="datetime" id="datetime" required class="p-2 rounded w-full">
+            <select name="category" id="category" class="p-2 rounded w-full">
+                <option value="Sell">Sell</option>
+                <option value="Donate">Donate</option>
+                <option value="Outfit">Outfit</option>
+            </select>
+            <label class="inline-flex items-center">
+                <input type="checkbox" name="reminder" id="reminder" class="mr-2"> Set Reminder
+            </label>
+            <button type="submit" class="bg-pink-500 text-white px-4 py-2 rounded w-full">Add Event</button>
+        </form>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="fixed bottom-0 left-0 right-0 bg-white shadow-lg flex justify-around p-4">
+        <a href="home.html" id="nav-shop" class="nav-item flex flex-col items-center text-gray-500">
+            🛍️ <span>Shop</span>
+        </a>
+        <a href="schedule.html" id="nav-schedule" class="nav-item flex flex-col items-center text-gray-500">
+            🗓️ <span>Schedule</span>
+        </a>
+        <a href="add_item.html" id="nav-add" class="nav-item flex flex-col items-center text-gray-500">
+            ➕ <span>Add</span>
+        </a>
+        <a href="planner.html" id="nav-planner" class="nav-item flex flex-col items-center text-gray-500">
+            👗 <span>Planner</span>
+        </a>
+        <a href="cart.html" id="nav-cart" class="nav-item flex flex-col items-center text-gray-500">
+            🛒 <span>Cart</span>
+        </a>
+    </nav>
+
+    <script src="js/schedule_script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+/* Basic Reset */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #f472b6, #fdba74); /* pink-400 to orange-300 */
+    color: white;
+}
+
+/* Header */
+.header {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    background: #1e1e1e;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.back-btn {
+    text-decoration: none;
+    color: #f472b6;
+    font-size: 24px;
+    margin-right: 16px;
+}
+
+/* Notification List */
+.notifications {
+    padding: 16px;
+}
+
+.notification {
+    padding: 12px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    background: #2a2a2a;
+    display: flex;
+    justify-content: space-between;
+}
+
+.notification .type {
+    font-weight: bold;
+    color: #f472b6;
+}
+
+.notification .time {
+    font-size: 12px;
+    color: #aaa;
+}

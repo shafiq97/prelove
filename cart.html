@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Shopping Cart - Pre-Love Closet Manager</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/cart.css">
+</head>
+
+<body class="bg-gradient-to-r from-pink-400 to-orange-300 min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-white shadow-md p-4 flex items-center justify-between">
+        <button id="menu-toggle" class="text-3xl focus:outline-none">☰</button>
+        <h1 class="text-xl font-bold">Shopping Cart</h1>
+        <a href="#" class="text-pink-500">Edit</a>
+    </header>
+
+    <!-- Sidebar -->
+<nav id="sidebar" class="fixed top-0 left-0 w-64 h-full bg-white shadow-lg transform -translate-x-full transition-transform duration-300 z-50">
+    <!-- Back Button -->
+    <button id="close-sidebar" class="text-3xl p-4 hover:text-pink-500 focus:outline-none">&lt;</button>
+
+    <ul class="p-6 space-y-4">
+        <li><a href="notification.html" class="block text-lg font-semibold hover:text-pink-500">🏠 Notification</a></li>
+            <li><a href="history.html" class="block text-lg font-semibold hover:text-pink-500">📦 History</a></li>
+            <li><a href="settings.html" class="block text-lg font-semibold hover:text-pink-500">🎁 Settings</a></li>
+            <li><a href="profile.html" class="block text-lg font-semibold hover:text-pink-500">👤 Profile</a></li>
+            <li><a href="logout.php" class="block text-lg font-semibold hover:text-pink-500">👤 Logout</a></li></li>
+    </ul>
+</nav>
+
+    <!-- Delivery Address -->
+    <section class="bg-white p-4 my-4">
+        <h2 class="font-semibold">Delivery Address</h2>
+        <p id="address">John Doe, +60123456789<br>123, Main Street, City, Malaysia</p>
+        <a href="address.html" class="text-pink-500">Change</a>
+    </section>
+
+    <!-- Cart Items -->
+    <main id="cart" class="p-4 space-y-6"></main>
+
+    <!-- Order Summary -->
+    <section class="bg-white p-4 mt-4 shadow-md">
+        <h3 class="font-semibold">Order Summary</h3>
+        <p>Subtotal: <span id="subtotal">RM0.00</span></p>
+        <hr class="my-2">
+        <p class="text-lg font-bold">Total: <span id="total">RM0.00</span></p>
+
+        <!-- Checkout Button (Submits to checkout.php) -->
+        <form action="checkout.php" method="POST" id="checkout-form">
+            <input type="hidden" name="cartData" id="cartData">
+            <button type="submit" id="checkout-btn" class="bg-pink-500 text-white w-full p-3 mt-4 rounded-lg">
+                Checkout
+            </button>
+        </form>
+    </section>
+
+    <!-- Bottom Navigation -->
+    <nav class="fixed bottom-0 left-0 right-0 bg-white shadow-lg flex justify-around p-4">
+        <a href="home.html" id="nav-shop" class="nav-item flex flex-col items-center text-gray-500">
+            🛍️ <span>Shop</span>
+        </a>
+        <a href="schedule.html" id="nav-schedule" class="nav-item flex flex-col items-center text-gray-500">
+            🗓️ <span>Schedule</span>
+        </a>
+        <a href="add_item.html" id="nav-add" class="nav-item flex flex-col items-center text-gray-500">
+            ➕ <span>Add</span>
+        </a>
+        <a href="planner.html" id="nav-planner" class="nav-item flex flex-col items-center text-gray-500">
+            👗 <span>Planner</span>
+        </a>
+        <a href="cart.html" id="nav-cart" class="nav-item flex flex-col items-center text-gray-500">
+            🛒 <span>Cart</span>
+        </a>
+    </nav>
+
+    <!-- Link to JavaScript -->
+    <script src="js/cart.js"></script>
+
+</body>
+
+</html>

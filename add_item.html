@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Item - Pre-Love Closet Manager</title>
+    <link rel="stylesheet" href="css/add_item.css">
+</head>
+<body>
+
+    <header>
+        <a href="home.html" class="back-btn">&lt; Back</a>
+        <h1>Add New Item</h1>
+    </header>
+
+    <main>
+        <form id="add-item-form" action="add_item.php" method="POST" enctype="multipart/form-data">
+            <!-- Upload Image OR Capture -->
+            <label for="item-image">Upload Images or Take a Picture:</label>
+            <input type="file" id="item-image" name="item_image[]" accept="image/*" multiple required>
+
+            <button type="button" id="open-camera">📸 Take a Picture</button>
+            <video id="camera-preview" autoplay style="display:none;"></video>
+            <canvas id="captured-image" style="display:none;"></canvas>
+            <input type="hidden" id="camera-image" name="camera_image">
+
+            <!-- Item Details -->
+            <label for="item-name">Item Name:</label>
+            <input type="text" id="item-name" name="item_name" required>
+
+            <label for="item-description">Description:</label>
+            <textarea id="item-description" name="item_description"></textarea>
+
+            <label for="item-condition">Condition:</label>
+            <select id="item-condition" name="item_condition">
+                <option value="New">New</option>
+                <option value="Like New">Like New</option>
+                <option value="Good">Good</option>
+                <option value="Fair">Fair</option>
+            </select>
+
+            <!-- Auto-Generated Valuation -->
+            <label>Estimated Value: <span id="item-valuation">RM0.00</span></label>
+
+            <!-- Choose Action -->
+            <div class="action-selection">
+                <input type="radio" id="sell" name="action" value="sell" checked>
+                <label for="sell">Sell</label>
+
+                <input type="radio" id="donate" name="action" value="donate">
+                <label for="donate">Donate</label>
+            </div>
+
+            <!-- Price Input (for selling) -->
+            <div id="price-section">
+                <label for="item-price">Set Price (RM):</label>
+                <input type="number" id="item-price" name="item_price">
+            </div>
+
+            <!-- Donation Options -->
+            <div id="donation-section" style="display: none;">
+                <label for="donation-center">Choose Donation Center:</label>
+                <input type="text" id="donation-center" name="donation_center" placeholder="Search center...">
+                
+                <label for="donation-date">Schedule Drop-off:</label>
+                <input type="datetime-local" id="donation-date" name="donation_date">
+            </div>
+
+            <button type="submit">Submit</button>
+        </form>
+    </main>
+
+    <script src="js/add_item.js"></script>
+
+</body>
+</html>

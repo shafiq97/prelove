@@ -1,0 +1,148 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    background-color: #f8f9fa;
+}
+  
+#sidebar {
+    background-color: #212529;
+    min-height: 100vh;
+    position: sticky;
+    top: 0;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+#sidebar .nav-link {
+    color: rgba(255, 255, 255, 0.8);
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    transition: all 0.3s ease;
+}
+
+#sidebar .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+#sidebar .nav-link.active {
+    background-color: #0d6efd;
+    color: white;
+}
+
+#sidebar .nav-link i {
+    width: 20px;
+    text-align: center;
+    margin-right: 10px;
+}
+
+main {
+    padding: 20px;
+}
+
+.card {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    background-color: rgba(0, 0, 0, 0.03);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    font-weight: 600;
+}
+
+.table img {
+    object-fit: cover;
+}
+
+.table th {
+    font-weight: 600;
+    background-color: #f8f9fa;
+}
+
+.form-label {
+    font-weight: 500;
+}
+
+/* Dashboard cards */
+.card-body {
+    position: relative;
+    z-index: 1;
+}
+
+.card-body i.fa-3x {
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+.card:hover .card-body i.fa-3x {
+    transform: scale(1.2);
+    opacity: 1;
+}
+
+/* Charts */
+canvas {
+    width: 100% !important;
+    height: 300px !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #sidebar {
+        position: relative;
+        min-height: auto;
+    }
+    
+    main {
+        margin-top: 20px;
+    }
+}
+
+/* Modal styling */
+.modal-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.modal-footer {
+    background-color: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+}
+
+/* Footer */
+.footer {
+    background-color: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+}
+  }
+  
+  .sidebar ul li {
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .sidebar ul li:hover {
+    background-color: #444;
+  }
+  
+  .main {
+    padding: 20px;
+    flex-grow: 1;
+  }
+  
+  .section {
+    background: #f4f4f4;
+    padding: 15px;
+    margin-top: 20px;
+  }
+  

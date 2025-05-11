@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Terms & Privacy Policy</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gradient-to-r from-pink-400 to-orange-300 min-h-screen text-gray-800">
+
+  <!-- Header -->
+  <header class="bg-white shadow p-4 flex items-center justify-between">
+    <button id="backBtn" class="text-xl font-bold text-pink-500">←</button>
+    <h1 class="text-xl font-bold text-pink-600">📜 Terms & Privacy Policy</h1>
+  </header>
+
+  <!-- Terms Content -->
+  <main class="p-6 max-w-3xl mx-auto bg-white mt-4 rounded-lg shadow-md space-y-4">
+    <h2 class="text-lg font-semibold text-pink-500">1. Introduction</h2>
+    <p>Welcome to Pre-Love Closet Manager. This document outlines our terms and privacy practices...</p>
+
+    <h2 class="text-lg font-semibold text-pink-500">2. Data Collection</h2>
+    <p>We collect basic information such as your name, email, and item preferences...</p>
+
+    <h2 class="text-lg font-semibold text-pink-500">3. Usage of Information</h2>
+    <p>Your data is used to enhance your experience with personalized recommendations...</p>
+
+    <h2 class="text-lg font-semibold text-pink-500">4. Rights</h2>
+    <p>You may request data deletion at any time by contacting our support team...</p>
+  </main>
+
+  <!-- Accept Button (only for login flow) -->
+  <div id="acceptContainer" class="text-center mt-6 hidden">
+    <button onclick="handleAccept()"
+      class="bg-pink-600 hover:bg-pink-700 text-white font-semibold py-2 px-6 rounded-lg shadow-md">
+      I Accept
+    </button>
+  </div>
+
+</body>
+
+<script src="js/script.js"></script>
+
+
+</html>

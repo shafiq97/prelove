@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pre-Love Closet Manager</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <h2>Pre-Love Closet Manager</h2>
+        </div>
+
+        <!-- Login Form -->
+        <div class="form-container" id="login-form">
+            <h3>Hello</h3>
+            <p>Sign into your Account</p>
+            <form action="login.php" method="POST">
+                <label for="username">Email ID:</label>
+                <input type="email" id="username" name="username" required>
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+
+                <label for="role">Select Role:</label>
+                <select id="role" name="role" required>
+                    <option value="" disabled selected>Please choose your role</option>
+                    <option value="user">User</option>
+                    <option value="admin">Admin</option>
+                    <option value="donation_center">Donation Center</option>
+                </select>
+
+                <button type="submit">Login</button>
+            </form>
+            <div class="social-icons">
+                <!-- Gmail Login -->
+                <a href="https://accounts.google.com/signin" target="_blank" title="Login with Gmail">
+                    <img src="gmail.webp" alt="Gmail" class="icon" />
+                </a>
+            
+                <!-- Instagram Login -->
+                <a href="https://www.instagram.com/accounts/login/" target="_blank" title="Login with Instagram">
+                    <img src="instagram.webp" alt="Instagram" class="icon" />
+                </a>
+              </div>              
+            <p>Don't have an account? <a href="#" onclick="showRegister()">Register Now</a></p>
+        </div>
+
+        <!-- Register Form -->
+        <div class="form-popup" id="register-form" style="display:none;">
+            <div class="back-button" onclick="showLogin()">← Back</div>
+            <h3>Create Account</h3>
+            <form action="register.php" method="POST" onsubmit="showPopup(event)">
+                <label for="full_name">Full Name:</label>
+                <input type="text" id="full_name" name="full_name" required>
+
+                <label for="new_email">Email ID:</label>
+                <input type="email" id="new_email" name="new_email" required>
+
+                <label for="phone">Phone Number:</label>
+                <input type="text" id="phone" name="phone" required>
+
+                <label for="address">Address:</label>
+                <input type="text" id="address" name="address" required>
+
+                <label for="new_password">Password:</label>
+                <input type="password" id="new_password" name="new_password" required>
+
+                <!-- Google reCAPTCHA -->
+                <div class="g-recaptcha" data-sitekey="6LdDyAErAAAAALtX40TOncavnl-MemGi1BJmUp8V"></div>
+
+                <div class="terms-container">
+                    <input type="checkbox" id="terms" name="terms" disabled>
+                    <label for="terms">
+                        I have read and agree to 
+                        <a href="terms.html" onclick="loadTerms(event)">Terms & Conditions</a>
+                    </label>
+                </div>
+                
+                <!-- Register Button (Initially Disabled) -->
+                <button type="submit" id="register-btn" disabled>Register Now</button>
+                
+                <!-- Terms Content Popup -->
+                <div id="termsPopup" class="popup" style="display: none;">
+                    <div class="popup-content">
+                        <h3>Terms & Conditions</h3>
+                        <div id="termsContent" style="max-height: 200px; overflow-y: auto;"></div>
+                        <button onclick="acceptAndRedirect()">I Accept</button>
+                    </div>
+                </div>
+            </form>
+            
+            <p>Already have an account? <a href="#" onclick="showLogin()">Login</a></p>
+        </div>
+    </div>
+
+    <!-- Popup Modal -->
+    <div id="popup" class="popup" style="display: none;">
+        <div class="popup-content">
+            <p>Registration successful! Please check your email.</p>
+            <button onclick="closePopup()">OK</button>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+
+</body>
+</html>
