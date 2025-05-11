@@ -410,25 +410,45 @@ function getProfile() {
 function updateProfile() {
     global $conn;
     
+    // Add detailed logging for debugging
+    error_log("UPDATE PROFILE ENDPOINT CALLED");
+    
     // Check authorization
     $headers = getallheaders();
-    if (!isset($headers['Authorization'])) {
+    error_log("Headers received: " . json_encode($headers));
+    
+    if (!isset($headers['Authorization']) && !isset($headers['authorization'])) {
+        error_log("No Authorization header found");
         http_response_code(401);
-        echo json_encode(['error' => 'Authentication required']);
+        echo json_encode(['error' => 'Authentication required - No Authorization header found']);
         return;
     }
     
-    $auth_header = $headers['Authorization'];
+    // Try to find the Authorization header (case-insensitive)
+    $auth_header = null;
+    if (isset($headers['Authorization'])) {
+        $auth_header = $headers['Authorization'];
+    } elseif (isset($headers['authorization'])) {
+        $auth_header = $headers['authorization'];
+    }
+    
+    error_log("Auth header found: " . $auth_header);
+    
     if (strpos($auth_header, 'Bearer ') !== 0) {
+        error_log("Invalid token format: " . $auth_header);
         http_response_code(401);
         echo json_encode(['error' => 'Invalid token format']);
         return;
     }
     
     $token = substr($auth_header, 7);
+    error_log("Extracted token: " . $token);
+    
     $user_data = verifyToken($token);
+    error_log("Verify token result: " . ($user_data ? json_encode($user_data) : 'false'));
     
     if (!$user_data) {
+        error_log("Token verification failed");
         http_response_code(401);
         echo json_encode(['error' => 'Invalid or expired token']);
         return;

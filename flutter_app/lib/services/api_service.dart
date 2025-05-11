@@ -43,12 +43,12 @@ class ApiService {
       final token = prefs.getString('auth_token');
       print('Retrieved token from storage: $token'); // Debug log
 
-      if (token != null) {
+      if (token != null && token.isNotEmpty) {
+        // Make sure we're using the exact same case for the header name that the server expects
         headers['Authorization'] = 'Bearer $token';
-        print(
-            'Added Authorization header: ${headers['Authorization']}'); // Debug log
+        print('Added Authorization header: ${headers['Authorization']}'); // Debug log
       } else {
-        print('No auth token found in storage!'); // Debug log
+        print('No auth token found in storage or token is empty!'); // Debug log
       }
     } else {
       print('Auth not required for this request'); // Debug log
@@ -77,6 +77,12 @@ class ApiService {
 
         // Decode and explicitly cast to Map<String, dynamic>
         final dynamic decodedJson = json.decode(response.body);
+        
+        // Directly return the decoded JSON if it's already a Map
+        if (decodedJson is Map<String, dynamic>) {
+          return decodedJson;
+        }
+        
         return Map<String, dynamic>.from(decodedJson);
       } catch (e) {
         print('Error decoding successful response: $e'); // Debug log
@@ -87,24 +93,83 @@ class ApiService {
       }
     } else if (response.statusCode == 401) {
       print('Unauthorized access - token may be invalid'); // Debug log
-      throw Exception('Unauthorized access. Please log in again.');
+      
+      // Try to parse the error message from the response if available
+      String errorMessage = 'Unauthorized access. Please log in again.';
+      try {
+        if (response.body.isNotEmpty) {
+          final errorData = json.decode(response.body);
+          if (errorData is Map && errorData.containsKey('error')) {
+            errorMessage = errorData['error'];
+          }
+        }
+      } catch (_) {}
+      
+      return {
+        'success': false,
+        'error': errorMessage,
+        'status': 401
+      };
     } else if (response.statusCode == 403) {
       print('Forbidden access - insufficient permissions'); // Debug log
-      throw Exception('You do not have permission to perform this action.');
+      
+      String errorMessage = 'You do not have permission to perform this action.';
+      try {
+        if (response.body.isNotEmpty) {
+          final errorData = json.decode(response.body);
+          if (errorData is Map && errorData.containsKey('error')) {
+            errorMessage = errorData['error'];
+          }
+        }
+      } catch (_) {}
+      
+      return {
+        'success': false,
+        'error': errorMessage,
+        'status': 403
+      };
     } else if (response.statusCode == 404) {
       print('Resource not found'); // Debug log
-      throw Exception('The requested resource was not found.');
+      
+      String errorMessage = 'The requested resource was not found.';
+      try {
+        if (response.body.isNotEmpty) {
+          final errorData = json.decode(response.body);
+          if (errorData is Map && errorData.containsKey('error')) {
+            errorMessage = errorData['error'];
+          }
+        }
+      } catch (_) {}
+      
+      return {
+        'success': false,
+        'error': errorMessage,
+        'status': 404
+      };
     } else if (response.statusCode == 400) {
       try {
         if (response.body.isEmpty) {
-          throw Exception('Invalid request with no details');
+          return {
+            'success': false,
+            'error': 'Invalid request with no details',
+            'status': 400
+          };
         }
         final errorData = json.decode(response.body);
         print('Bad request: $errorData'); // Debug log
-        throw Exception(errorData['error'] ?? 'Invalid request');
+        
+        return {
+          'success': false,
+          'error': errorData['error'] ?? 'Invalid request',
+          'status': 400
+        };
       } catch (e) {
         print('Error decoding 400 response: $e'); // Debug log
-        throw Exception('Invalid request');
+        return {
+          'success': false,
+          'error': 'Invalid request',
+          'status': 400
+        };
       }
     } else if (response.statusCode == 500) {
       try {
@@ -809,22 +874,12 @@ class ApiService {
   Future<Map<String, dynamic>> testToken() async {
     try {
       final url = Uri.parse('$_baseUrl/auth_api.php?action=test_token');
-      final token = await getToken();
-
-      // Explicitly set headers with token
-      final headers = {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-      };
-
+      
       print('Test token request URL: $url'); // Debug log
-      print('Test token request headers: $headers'); // Debug log
-      print('Authorization header: ${headers['Authorization']}'); // Debug log
-
+      
       final response = await http.get(
         url,
-        headers: headers,
+        headers: await _getHeaders(), // Use the same header creation method for consistency
       );
 
       print('Test token response status: ${response.statusCode}'); // Debug log
@@ -836,6 +891,72 @@ class ApiService {
       return {
         'success': false,
         'error': 'Failed to test token: ${e.toString()}',
+      };
+    }
+  }
+
+  // New test method for authentication issues
+  Future<Map<String, dynamic>> testAuthentication() async {
+    try {
+      final url = Uri.parse('$_baseUrl/auth_test.php');
+      
+      print('Auth test request URL: $url'); // Debug log
+      
+      final response = await http.get(
+        url,
+        headers: await _getHeaders(), // Use the same header creation method
+      );
+
+      print('Auth test response status: ${response.statusCode}'); // Debug log
+      print('Auth test response body: ${response.body}'); // Debug log
+
+      return _handleResponse(response);
+    } catch (e) {
+      print('Auth test error: $e'); // Debug log
+      return {
+        'success': false,
+        'error': 'Failed to test authentication: ${e.toString()}',
+      };
+    }
+  }
+
+  // Debug token verification
+  Future<Map<String, dynamic>> debugToken() async {
+    try {
+      final url = Uri.parse('$_baseUrl/debug_token.php');
+      final token = await getToken();
+      
+      if (token == null) {
+        return {
+          'success': false,
+          'error': 'No token available',
+        };
+      }
+
+      // Explicitly set headers with token
+      final headers = {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $token',
+      };
+
+      print('Debug token request URL: $url'); // Debug log
+      print('Debug token request headers: $headers'); // Debug log
+
+      final response = await http.get(
+        url,
+        headers: headers,
+      );
+
+      print('Debug token response status: ${response.statusCode}'); // Debug log
+      print('Debug token response body: ${response.body}'); // Debug log
+
+      return _handleResponse(response);
+    } catch (e) {
+      print('Debug token error: $e'); // Debug log
+      return {
+        'success': false,
+        'error': 'Failed to debug token: ${e.toString()}',
       };
     }
   }

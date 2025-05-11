@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import '../services/admin_api.dart';
+import '../services/auth_service.dart';
 
 class AdminSidebar extends StatefulWidget {
   const AdminSidebar({Key? key}) : super(key: key);
@@ -41,14 +44,13 @@ class _AdminSidebarState extends State<AdminSidebar> {
   // Handle logout
   Future<void> _logout() async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.remove('authToken');
-      await prefs.remove('username');
-      await prefs.remove('email');
-      await prefs.remove('userId');
+      // First import the AuthService to properly handle logout
+      final authService = Provider.of<AuthService>(context, listen: false);
+      await authService.logout();
 
       if (!mounted) return;
-      Navigator.of(context).pushReplacementNamed('/login');
+      // Use GoRouter to navigate to login screen
+      context.go('/login');
     } catch (e) {
       print('Error during logout: $e');
       if (!mounted) return;
@@ -84,7 +86,7 @@ class _AdminSidebarState extends State<AdminSidebar> {
             title: const Text('Dashboard'),
             onTap: () {
               Navigator.pop(context);
-              Navigator.pushReplacementNamed(context, '/admin');
+              context.go('/admin');
             },
           ),
           ListTile(
@@ -92,7 +94,7 @@ class _AdminSidebarState extends State<AdminSidebar> {
             title: const Text('User Management'),
             onTap: () {
               Navigator.pop(context);
-              Navigator.pushNamed(context, '/admin/users');
+              context.go('/admin/users');
             },
           ),
           ListTile(
@@ -100,7 +102,7 @@ class _AdminSidebarState extends State<AdminSidebar> {
             title: const Text('Item Management'),
             onTap: () {
               Navigator.pop(context);
-              Navigator.pushNamed(context, '/admin/items');
+              context.go('/admin/items');
             },
           ),
           ListTile(
@@ -108,7 +110,7 @@ class _AdminSidebarState extends State<AdminSidebar> {
             title: const Text('Event Management'),
             onTap: () {
               Navigator.pop(context);
-              Navigator.pushNamed(context, '/admin/events');
+              context.go('/admin/events');
             },
           ),
           ListTile(
@@ -116,7 +118,7 @@ class _AdminSidebarState extends State<AdminSidebar> {
             title: const Text('Donation Centers'),
             onTap: () {
               Navigator.pop(context);
-              Navigator.pushNamed(context, '/admin/donations');
+              context.go('/admin/donations');
             },
           ),
           const Divider(),
@@ -125,7 +127,7 @@ class _AdminSidebarState extends State<AdminSidebar> {
             title: const Text('Settings'),
             onTap: () {
               Navigator.pop(context);
-              Navigator.pushNamed(context, '/settings');
+              context.go('/settings');
             },
           ),
           ListTile(

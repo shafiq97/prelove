@@ -108,6 +108,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     try {
       setState(() => _isLoading = true);
+      
+      // Debug token first
+      final tokenTest = await _apiService.testAuthentication();
+      if (!tokenTest['success']) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Authentication issue: ${tokenTest['error'] ?? "Unknown auth error"}')),
+        );
+        setState(() => _isLoading = false);
+        return;
+      }
 
       final response = await _apiService.updateUserProfile(
         fullName: _fullNameController.text,
@@ -303,6 +313,51 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
+  Future<void> _debugTokenVerification() async {
+    try {
+      setState(() {
+        _isLoading = true;
+        _error = '';
+      });
+
+      final response = await _apiService.debugToken();
+      
+      setState(() {
+        _isLoading = false;
+      });
+      
+      // Show response in a dialog
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text(response['success'] ? 'Token Verified' : 'Token Error'),
+          content: SingleChildScrollView(
+            child: Text(
+              response['success'] 
+                ? 'Token data: ${response['token_data']}' 
+                : 'Error: ${response['error']}',
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Close'),
+            ),
+          ],
+        ),
+      );
+    } catch (e) {
+      setState(() {
+        _error = e.toString();
+        _isLoading = false;
+      });
+      
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error debugging token: $e')),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<AuthService>(context).currentUser;
@@ -326,6 +381,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
       appBar: AppBar(
         title: const Text('Profile'),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.bug_report),
+            onPressed: _debugTokenVerification,
+            tooltip: 'Debug Token',
+          ),
           IconButton(
             icon: const Icon(Icons.settings),
             onPressed: () => context.go('/settings'),

@@ -55,6 +55,12 @@ function verifyToken($token) {
         ];
         */
         
+        // Check for empty token
+        if (empty($token)) {
+            error_log("Empty token provided");
+            return false;
+        }
+        
         // Normal validation logic below (for production use)
         // Step 1: Base64 decode
         $base64_decoded = base64_decode($token);
