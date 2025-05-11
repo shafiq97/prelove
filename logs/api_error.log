@@ -346,3 +346,19 @@
 [11-May-2025 06:37:13 Europe/Berlin] Database connection successful
 [11-May-2025 06:37:13 Europe/Berlin] getItems called with page: 1, limit: 10, category: , user_id: 
 [11-May-2025 06:37:13 Europe/Berlin] Query: SELECT * FROM items WHERE 1=1 ORDER BY created_at DESC LIMIT :limit OFFSET :offset with params: {":limit":10,":offset":0}
+[11-May-2025 07:02:23 Europe/Berlin] Error configuration loaded from error_config.php
+[11-May-2025 07:02:23 Europe/Berlin] Database connection successful
+[11-May-2025 07:02:23 Europe/Berlin] getItems called with page: 1, limit: 10, category: , user_id: 
+[11-May-2025 07:02:23 Europe/Berlin] Query: SELECT * FROM items WHERE 1=1 ORDER BY created_at DESC LIMIT :limit OFFSET :offset with params: {":limit":10,":offset":0}
+[11-May-2025 07:07:01 Europe/Berlin] Error configuration loaded from error_config.php
+[11-May-2025 07:07:01 Europe/Berlin] Database connection successful
+[11-May-2025 07:07:01 Europe/Berlin] getItems called with page: 1, limit: 10, category: , user_id: 
+[11-May-2025 07:07:01 Europe/Berlin] Query: SELECT * FROM items WHERE 1=1 ORDER BY created_at DESC LIMIT :limit OFFSET :offset with params: {":limit":10,":offset":0}
+[11-May-2025 07:07:24 Europe/Berlin] Error configuration loaded from error_config.php
+[11-May-2025 07:07:24 Europe/Berlin] Database connection successful
+[11-May-2025 07:07:24 Europe/Berlin] getItems called with page: 1, limit: 10, category: , user_id: 
+[11-May-2025 07:07:24 Europe/Berlin] Query: SELECT * FROM items WHERE 1=1 ORDER BY created_at DESC LIMIT :limit OFFSET :offset with params: {":limit":10,":offset":0}
+[11-May-2025 07:07:38 Europe/Berlin] Error configuration loaded from error_config.php
+[11-May-2025 07:07:38 Europe/Berlin] Database connection successful
+[11-May-2025 07:07:38 Europe/Berlin] getItems called with page: 1, limit: 10, category: , user_id: 
+[11-May-2025 07:07:38 Europe/Berlin] Query: SELECT * FROM items WHERE 1=1 ORDER BY created_at DESC LIMIT :limit OFFSET :offset with params: {":limit":10,":offset":0}
